@@ -1,0 +1,20 @@
+[
+  {
+    "title": "FTC Pitstop",
+    "link": "https://github.com/nesetkab/ftc-pitstop",
+    "icon": "/pitstop.svg",
+    "description": "an all-in-one dashboard for streamlining robotics competitions"
+  },
+  {
+    "title": "The Hive",
+    "link": "https://github.com/nesetkab/thehive",
+    "icon": "/hive.svg",
+    "description": "next-js website for my robotics team"
+  },
+  {
+    "title": "Slack Bot",
+    "link": "https://github.com/nesetkab/slackk",
+    "icon": "/slack.svg",
+    "description": "a Slack bot for documentation & communication for a robotics team"
+  }
+]
