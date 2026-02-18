@@ -5,7 +5,7 @@
   import links from "$lib/links.json";
 </script>
 
-<div class="relative min-h-screen bg-bg-grey font-sans overflow-hidden">
+<div class="relative min-h-screen bg-background font-sans overflow-hidden">
   <div class="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-1/2">
     <AsciiCat />
   </div>
