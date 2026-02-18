@@ -49,8 +49,8 @@
 >
   <pre
     bind:this={preEl}
-    class="text-accent select-none font-mono whitespace-pre origin-center"
-    style="font-size: 16px; line-height: 1; letter-spacing: -0.2em; transform: scale({scale});"><span
+    class="text-accent/80 hover:text-accent select-none font-mono whitespace-pre origin-center"
+    style="font-size: 25px; line-height: 1; letter-spacing: -0.2em; transform: scale({scale});"><span
       class:invisible={!v[0]}>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</span
     >
 <span class:invisible={!v[1]}>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⣉⣙⣷⡦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</span>

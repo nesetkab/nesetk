@@ -1,13 +1,13 @@
 <script lang="ts">
-  import SpinningStar from "$lib/SpinningStar.svelte";
-  import AsciiCat from "$lib/AsciiCat.svelte";
+  import Star from "$lib/Star.svelte";
+  import Cat from "$lib/Cat.svelte";
   import projects from "$lib/projects.json";
   import links from "$lib/links.json";
 </script>
 
 <div class="relative min-h-screen bg-background font-sans overflow-hidden">
   <div class="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-1/2">
-    <AsciiCat />
+    <Cat />
   </div>
   <main
     class="relative z-10 flex min-h-screen flex-col justify-between py-32 px-6 sm:px-16 max-w-xl"
@@ -21,13 +21,13 @@
         </h1>
       </div>
       <div class="flex flex-col gap-10">
-        <SpinningStar
+        <Star
           label="about me"
           description="i'm a robotics nerd, web developer, and a high school senior"
           delay={100}
           defaultOpen={true}
         />
-        <SpinningStar label="projects" delay={250} defaultOpen={true}>
+        <Star label="projects" delay={250} defaultOpen={true}>
           <div class="flex flex-col gap-4">
             {#each projects as project}
               <a
@@ -46,8 +46,8 @@
               </a>
             {/each}
           </div>
-        </SpinningStar>
-        <SpinningStar label="links" delay={400} defaultOpen={true}>
+        </Star>
+        <Star label="links" delay={400} defaultOpen={true}>
           <div class="flex flex-col gap-4">
             {#each links as link}
               <a
@@ -61,7 +61,7 @@
               </a>
             {/each}
           </div>
-        </SpinningStar>
+        </Star>
       </div>
     </div>
   </main>
