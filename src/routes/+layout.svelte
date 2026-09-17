@@ -1,7 +1,13 @@
 <script>
 	import '../app.css';
+	import Nav from '$lib/Nav.svelte';
 
 	let { children } = $props();
 </script>
 
-{@render children()}
+<div class="relative min-h-screen bg-background font-sans overflow-hidden">
+	<Nav />
+	<div class="relative z-10">
+		{@render children()}
+	</div>
+</div>
