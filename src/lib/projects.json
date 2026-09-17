@@ -1,5 +1,17 @@
 [
   {
+    "title": "Philidor",
+    "link": "https://github.com/nesetkab/philidor",
+    "icon": "/philidor.svg",
+    "description": "a chess engine that plays for the draw against any opponent"
+  },
+  {
+    "title": "ClassBar",
+    "link": "https://github.com/nesetkab/classbar",
+    "icon": "/classbar.svg",
+    "description": "a macos menu bar app for my classes and assignments"
+  },
+  {
     "title": "FTC Pitstop",
     "link": "https://github.com/nesetkab/ftc-pitstop",
     "icon": "/pitstop.svg",

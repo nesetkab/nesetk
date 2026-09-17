@@ -23,7 +23,7 @@
       <div class="flex flex-col gap-10">
         <Star
           label="about me"
-          description="i'm a robotics nerd, web developer, and a high school senior"
+          description="i'm a robotics nerd, web & ml dev, and a freshman studying eece @ northeastern"
           delay={100}
           defaultOpen={true}
         />
