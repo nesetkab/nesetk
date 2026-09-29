@@ -74,12 +74,13 @@ export const projects: Project[] = [
 		points: [
 			'Website for FTC team 3747, The Hive, from Beehive Science & Technology Academy in Sandy, Utah',
 			'Home, about, sponsors, and contact pages',
-			'Built with SvelteKit, Tailwind v4, and Instrument Sans'
+			'Built with SvelteKit, Tailwind v4, and Instrument Sans, and live at hive3747.com'
 		],
 		images: [],
 		links: [
 			{ title: 'github', href: 'https://github.com/nesetkab/thehive' },
-			{ title: 'instagram', href: 'https://www.instagram.com/thehive3747/' }
+			{ title: 'instagram', href: 'https://www.instagram.com/thehive3747/' },
+			{ title: 'website', href: 'https://hive3747.com' }
 		]
 	},
 	{
