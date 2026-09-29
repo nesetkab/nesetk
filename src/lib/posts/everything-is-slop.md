@@ -16,8 +16,10 @@ I miss the old days when moving a button 2px took weeks or months of A/B testing
 
 The idea that everything needs to be "optimized" and pushed as fast as possible is just horrible. As an example, Google's hard push onto their AI search feature resulted in them literally removing features. Finding definitions or synonyms for words is much worse because now it's AI generated? They literally had no reason to change it, as the old dictionary embed was perfect.
 
-![definition](/blogs/definition.png)
+![Comparison of the old vs current Google definition views](/blogs/definition.png)
 
 I hope you can tell that that pisses me off.
 
-Anyways, my main point here is that AI features and use in companies should be slowed. It doesn't matter how much Claude thinks it's a good feature, what really matters is what the users think. The whole point of the application is for the user, so why not prioritize them anymore? Why prioritize pushing features as fast as possible without proper review? 
+Anyways, my main point here is that AI features and use in companies should be slowed. It doesn't matter how much Claude thinks it's a good feature, what really matters is what the users think. The whole point of the application is for the user, so why not prioritize them anymore? Why prioritize pushing features as fast as possible without proper review?
+
+The next time you think about adding a feature, you should first consider who will actually use it. Is it genuinely a good feature to add? Is it going to increase your overhead? Adding a feature costs a heck of a lot more time and effort than just maintaining/improving the existing ones.
