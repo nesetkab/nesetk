@@ -57,7 +57,7 @@
 						<span class="peek" aria-hidden="true"><span>view</span></span>
 					</button>
 				{:else}
-					<Truchet color={project.color} seed={seed + i} label="shuffle the {project.title} pattern" />
+					<Truchet seed={seed + i} label="shuffle the {project.title} pattern" />
 				{/if}
 			</figure>
 		{/each}

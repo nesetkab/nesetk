@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { reduced } from '$lib/motion';
 
-	let { color, seed = 1, label = '' }: { color: string; seed?: number; label?: string } = $props();
+	let { seed = 1, label = '' }: { seed?: number; label?: string } = $props();
 
 	type Tile = { r: number; bg: number; fg: number; delay: number };
 
@@ -20,12 +20,7 @@
 		};
 	}
 
-	const swatches = $derived([
-		color,
-		'var(--fg)',
-		`color-mix(in srgb, ${color} 35%, var(--bg))`,
-		'var(--bg)'
-	]);
+	const swatches = ['var(--accent)', 'var(--fg)', 'color-mix(in srgb, var(--accent) 35%, var(--bg))', 'var(--bg)'];
 
 	function build(w: number, h: number) {
 		const nr = Math.max(1, Math.round(h / 48));
@@ -94,7 +89,6 @@
 	class="truchet"
 	class:visible
 	bind:this={box}
-	style:--c={color}
 	style:--cols={cols}
 	style:--rows={rows}
 	style:--t="{side}px"
@@ -118,7 +112,7 @@
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-		background: color-mix(in srgb, var(--c) 35%, var(--bg));
+		background: color-mix(in srgb, var(--accent) 35%, var(--bg));
 		cursor: pointer;
 	}
 
@@ -127,6 +121,7 @@
 		overflow: hidden;
 		opacity: 0;
 		scale: 0.4;
+		transition: background-color 0.45s ease;
 	}
 
 	.visible .tile {
@@ -148,6 +143,8 @@
 		width: 100%;
 		height: 100%;
 		border-radius: 0 0 100% 0;
-		transition: rotate 0.6s var(--spring);
+		transition:
+			rotate 0.6s var(--spring),
+			background-color 0.45s ease;
 	}
 </style>
