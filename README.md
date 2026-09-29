@@ -11,6 +11,7 @@ npm run build    # static site in build/
 ## Editing content
 
 - **Projects and links:** `src/lib/data.ts`. Each project has a color, tags, a description, links, and an optional `images` list (files in `static/`). A project with no images shows a generated quarter-circle pattern.
+- **Resume:** the PDF is `static/resume.pdf`, and the `/resume` page reads its text from `src/lib/resume.ts`. Update both together.
 - **Blog posts:** one Markdown file per post in `src/lib/posts/`. The file name is the URL slug. Front matter:
 
   ```md

@@ -5,6 +5,7 @@
 	import { ui } from '$lib/state.svelte';
 	import { HOME_COLOR, projects } from '$lib/data';
 	import { posts } from '$lib/posts';
+	import { RESUME_COLOR } from '$lib/resume';
 
 	let el: HTMLDivElement;
 
@@ -12,6 +13,7 @@
 		const [, kind, slug] = path.split('/');
 		if (kind === 'projects') return projects.find((p) => p.slug === slug)?.color ?? HOME_COLOR;
 		if (kind === 'blog') return posts.find((p) => p.slug === slug)?.color ?? HOME_COLOR;
+		if (kind === 'resume') return RESUME_COLOR;
 		return HOME_COLOR;
 	}
 

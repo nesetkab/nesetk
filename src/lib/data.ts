@@ -113,7 +113,8 @@ export const links: Link[] = [
 	{ title: 'discord', href: 'https://discord.com/users/1009005900821954644' },
 	{ title: 'github', href: 'https://github.com/nesetkab' },
 	{ title: 'linkedin', href: 'https://www.linkedin.com/in/neset-kablan' },
-	{ title: 'twitter' }
+	{ title: 'twitter' },
+	{ title: 'resume', href: '/resume' }
 ];
 
 export const palette = [HOME_COLOR, '#ff7be5', '#ff8a4b', '#ffc400', '#1fc86b', '#8a5cff', '#00b8b0', '#ff4d4d'];
