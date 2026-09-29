@@ -63,6 +63,21 @@
 		{/each}
 	</section>
 
+	{#if project.points?.length}
+		<Row rot={90} label="details" labelWidth={148} delay={300}>
+			<div class="details">
+				{#if project.when}
+					<p class="when rise" style:--d="400ms">{project.when}</p>
+				{/if}
+				<ul>
+					{#each project.points as point, j}
+						<li class="rise" style:--d="{450 + j * 70}ms" style:--j={j}>{point}</li>
+					{/each}
+				</ul>
+			</div>
+		</Row>
+	{/if}
+
 	{#if project.links.length}
 		<LinksRow links={project.links} labelWidth={248} delay={500} />
 	{/if}
@@ -128,6 +143,48 @@
 			scale 0.6s var(--spring);
 	}
 
+	.details {
+		padding-top: calc(8 * var(--u));
+	}
+
+	.when {
+		font-size: calc(18 * var(--u));
+		color: var(--muted);
+		margin-bottom: calc(12 * var(--u));
+	}
+
+	.details ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: calc(10 * var(--u));
+		max-width: calc(760 * var(--u));
+	}
+
+	.details li {
+		position: relative;
+		padding-left: calc(28 * var(--u));
+		font-size: calc(22 * var(--u));
+		line-height: 1.35;
+		letter-spacing: -0.02em;
+	}
+
+	.details li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.38em;
+		width: 0.62em;
+		height: 0.62em;
+		background: var(--accent);
+		border-radius: 0 0 100% 0;
+		transition: rotate 0.6s var(--spring) calc(var(--j) * 70ms);
+	}
+
+	.details:hover li::before {
+		rotate: 180deg;
+	}
+
 	.gallery:global([data-inview='true']) img {
 		clip-path: circle(150% at 0 0);
 	}
@@ -143,6 +200,15 @@
 
 		.about {
 			font-size: 22px;
+		}
+
+		.when {
+			font-size: 14px;
+		}
+
+		.details li {
+			padding-left: 22px;
+			font-size: 17px;
 		}
 
 		.gallery {
