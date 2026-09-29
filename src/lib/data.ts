@@ -20,7 +20,10 @@ export const projects: Project[] = [
 		color: '#ff7be5',
 		description: 'a customizable dashboard for competitive robotics (FTC)',
 		images: ['/projects/pitstop-1.webp'],
-		links: [{ title: 'github', href: 'https://github.com/nesetkab/ftc-pitstop' }]
+		links: [
+			{ title: 'github', href: 'https://github.com/nesetkab/ftc-pitstop' },
+			{ title: 'website', href: 'https://www.ftcpitstop.com/' }
+		]
 	},
 	{
 		slug: 'philidor',
