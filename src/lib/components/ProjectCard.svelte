@@ -145,6 +145,7 @@
 		align-self: start;
 		display: flex;
 		flex-direction: column;
+		max-width: 196px;
 		padding-left: 14px;
 		color: #000;
 	}
