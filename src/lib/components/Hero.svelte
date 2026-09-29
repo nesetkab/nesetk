@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { untrack, type Snippet } from 'svelte';
 	import Quarter from './Quarter.svelte';
 	import BackLink from './BackLink.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
@@ -24,6 +24,17 @@
 		clicks === 0 ? color : palette.filter((c) => c !== color)[(clicks - 1) % (palette.length - 1)]
 	);
 
+	let header: HTMLElement;
+
+	$effect(() => {
+		color;
+		untrack(() => (clicks = 0));
+	});
+
+	$effect(() => {
+		header.closest('main')?.style.setProperty('--accent', current);
+	});
+
 	function play(e: MouseEvent) {
 		clicks++;
 		quarter.spin();
@@ -34,7 +45,7 @@
 	}
 </script>
 
-<header class="hero">
+<header class="hero" bind:this={header}>
 	<button class="hit" onclick={play} aria-label="spin the quarter circle">
 		<Quarter bind:this={quarter} size={190} color={current} intro="grow" hero />
 	</button>

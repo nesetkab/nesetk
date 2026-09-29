@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let { color }: { color: string } = $props();
+	let { color = 'var(--accent)' }: { color?: string } = $props();
 
 	let p = $state(0);
 	let scrollable = $state(false);
