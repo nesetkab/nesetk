@@ -15,6 +15,7 @@
 			<li class="rise" style:--d="{delay + 200 + i * 70}ms">
 				{#if link.href}
 					<a
+						class="fill"
 						href={link.href}
 						target={opensTab(link.href) ? '_blank' : undefined}
 						rel={opensTab(link.href) ? 'noopener noreferrer' : undefined}
@@ -40,16 +41,8 @@
 		line-height: 1.2;
 	}
 
-	a,
-	.soon {
+	a {
 		display: inline-block;
-		background: linear-gradient(currentColor, currentColor) 0 100% / 0 calc(2 * var(--u)) no-repeat;
-		transition: background-size 0.45s var(--out);
-	}
-
-	a:hover,
-	a:focus-visible {
-		background-size: 100% calc(2 * var(--u));
 	}
 
 	.soon {
@@ -63,11 +56,6 @@
 			justify-content: flex-start;
 			gap: 12px 28px;
 			font-size: 22px;
-		}
-
-		a:hover,
-		a:focus-visible {
-			background-size: 100% 2px;
 		}
 	}
 </style>

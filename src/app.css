@@ -115,6 +115,16 @@ img {
 	}
 }
 
+.fill {
+	background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 0.1em no-repeat;
+	transition: background-size 0.35s var(--out);
+}
+
+.fill:hover,
+.fill:focus-visible {
+	background-size: 100% 100%;
+}
+
 .rise {
 	animation: rise 0.9s var(--d, 0ms) var(--out) both;
 }

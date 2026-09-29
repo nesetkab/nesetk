@@ -57,7 +57,7 @@
 	<Row rot={180} hover="wobble" delay={150}>
 		<p class="msg rise" style:--d="300ms">
 			{lost ? "didn't find anything here." : 'something went wrong here.'}
-			<a class="home" href="/">head home</a> or take a break with this game.
+			<a class="fill" href="/">head home</a> or take a break with this game.
 		</p>
 	</Row>
 
@@ -79,7 +79,7 @@
 			<div class="status rise" style:--d="700ms" aria-live="polite">
 				{#if solved}
 					<p class="big">fixed in {moves} {moves === 1 ? 'move' : 'moves'}.</p>
-					<p><a class="home" href="/">go home</a> or <button class="again" onclick={again}>break it again</button></p>
+					<p><a class="fill" href="/">go home</a> or <button class="fill" onclick={again}>break it again</button></p>
 				{:else}
 					<p class="big">moves: {moves}</p>
 					<p class="hint">click a piece to turn it.</p>
@@ -109,19 +109,6 @@
 		font-size: calc(36 * var(--u));
 		line-height: 1.25;
 		max-width: calc(760 * var(--u));
-	}
-
-	.home,
-	.again {
-		background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 0.1em no-repeat;
-		transition: background-size 0.35s var(--out);
-	}
-
-	.home:hover,
-	.home:focus-visible,
-	.again:hover,
-	.again:focus-visible {
-		background-size: 100% 100%;
 	}
 
 	.puzzle {

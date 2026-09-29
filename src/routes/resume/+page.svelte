@@ -32,7 +32,7 @@
 	<Row rot={180} hover="wobble" delay={150}>
 		<p class="about rise" style:--d="300ms">
 			see everything here or<br />
-			<a class="download" href="/resume.pdf" target="_blank" rel="noopener">open the pdf</a>
+			<a class="fill" href="/resume.pdf" target="_blank" rel="noopener">open the pdf</a>
 		</p>
 	</Row>
 
@@ -96,16 +96,6 @@
 	.about {
 		font-size: calc(36 * var(--u));
 		line-height: 1.25;
-	}
-
-	.download {
-		background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 0.1em no-repeat;
-		transition: background-size 0.35s var(--out);
-	}
-
-	.download:hover,
-	.download:focus-visible {
-		background-size: 100% 100%;
 	}
 
 	.entries {
