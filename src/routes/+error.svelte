@@ -65,8 +65,8 @@
 
 	<Row rot={180} hover="wobble" delay={150}>
 		<p class="msg rise" style:--d="300ms">
-			{lost ? 'this page rolled away.' : 'something went wrong here.'} put the circle back together, or
-			<a class="home" href="/">head home</a>.
+			{lost ? "didn't find anything here." : 'something went wrong here.'}
+			<a class="home" href="/">head home</a> or take a break with this game.
 		</p>
 	</Row>
 
