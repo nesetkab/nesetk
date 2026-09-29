@@ -92,9 +92,9 @@
 	.card {
 		position: relative;
 		display: grid;
-		grid-template-columns: 213px 1fr;
+		grid-template-columns: 238px 1fr;
 		align-items: center;
-		width: 405px;
+		width: 430px;
 		min-height: 172px;
 		padding: 16px 18px 16px 0;
 		overflow: hidden;
@@ -118,8 +118,9 @@
 		position: absolute;
 		left: 0;
 		top: 0;
-		width: 228px;
-		height: 228px;
+		/* the arc is widest at the top edge, so the text column (238px) starts past it */
+		width: 220px;
+		height: 220px;
 		border-radius: 0 0 100% 0;
 		background: color-mix(in srgb, var(--c) 62%, #fff);
 		transform-origin: 0 0;
