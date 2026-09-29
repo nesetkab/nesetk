@@ -114,7 +114,7 @@
 	}
 
 	.lightbox::backdrop {
-		background: color-mix(in srgb, var(--bg) 94%, transparent);
+		background: color-mix(in srgb, var(--bg) 98%, transparent);
 		animation: fade 0.35s ease both;
 	}
 
@@ -139,9 +139,10 @@
 
 	img {
 		max-width: 100%;
-		max-height: 100%;
+		max-height: calc(100dvh - 5vh - 96px);
 		object-fit: contain;
 		border-radius: 8px;
+		box-shadow: 0 0 0 1px color-mix(in srgb, var(--fg) 14%, transparent);
 		transform-origin: top center;
 	}
 

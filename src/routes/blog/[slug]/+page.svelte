@@ -2,12 +2,19 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import Row from '$lib/components/Row.svelte';
 	import Progress from '$lib/components/Progress.svelte';
+	import Lightbox from '$lib/components/Lightbox.svelte';
 	import { render } from '$lib/markdown';
-	import { inview } from '$lib/motion';
+	import { clicks, inview } from '$lib/motion';
 
 	let { data } = $props();
 	let post = $derived(data.post);
-	let html = $derived(render(post.body));
+	let body = $derived(render(post.body));
+	let lightbox = $state<Lightbox>();
+
+	function zoom(e: MouseEvent) {
+		const shot = (e.target as HTMLElement).closest<HTMLElement>('.zoom')?.dataset.shot;
+		if (shot !== undefined) lightbox?.show(Number(shot));
+	}
 </script>
 
 <svelte:head>
@@ -26,11 +33,15 @@
 		</Row>
 	{/if}
 
-	<article class="body rise" style:--d="450ms" data-inview="false" use:inview>
-		{@html html}
+	<article class="body rise" style:--d="450ms" data-inview="false" use:inview use:clicks={zoom}>
+		{@html body.html}
 	</article>
 
 	<Progress />
+
+	{#if body.images.length}
+		<Lightbox bind:this={lightbox} images={body.images} title={post.title} />
+	{/if}
 </main>
 
 <style>
@@ -110,6 +121,36 @@
 	.body :global(pre code) {
 		background: none;
 		padding: 0;
+	}
+
+	.body :global(figure) {
+		margin: 1.6em 0;
+	}
+
+	.body :global(.zoom) {
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		border-radius: 8px;
+		cursor: zoom-in;
+	}
+
+	.body :global(p .zoom) {
+		display: inline-block;
+		width: auto;
+		max-width: 100%;
+		vertical-align: middle;
+	}
+
+	.body :global(.zoom img) {
+		width: 100%;
+		height: auto;
+		transition: scale 0.6s var(--spring);
+	}
+
+	.body :global(.zoom:hover img),
+	.body :global(.zoom:focus-visible img) {
+		scale: 1.03;
 	}
 
 	@media (max-width: 760px) {
