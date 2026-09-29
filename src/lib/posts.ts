@@ -15,7 +15,8 @@ const files = import.meta.glob('./posts/*.md', { query: '?raw', import: 'default
 
 function parse(path: string, raw: string): Post {
 	const slug = path.split('/').pop()!.replace(/\.md$/, '');
-	const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+	const text = raw.replace(/\r\n?/g, '\n');
+	const match = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
 	const meta: Record<string, string> = {};
 	for (const line of (match?.[1] ?? '').split('\n')) {
 		const i = line.indexOf(':');
@@ -29,7 +30,7 @@ function parse(path: string, raw: string): Post {
 		color: meta.color ?? '#ff8a4b',
 		tldr: meta.tldr ?? '',
 		date: meta.date ?? '',
-		body: (match?.[2] ?? raw).trim()
+		body: (match?.[2] ?? text).trim()
 	};
 }
 

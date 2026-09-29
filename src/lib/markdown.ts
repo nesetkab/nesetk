@@ -1,15 +1,23 @@
 const escape = (s: string) =>
 	s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+function safeHref(href: string) {
+	const scheme = href.match(/^([a-z][a-z0-9+.-]*):/i)?.[1].toLowerCase();
+	return !scheme || scheme === 'http' || scheme === 'https' || scheme === 'mailto';
+}
+
 function inline(s: string) {
-	return escape(s)
-		.replace(/`([^`]+)`/g, '<code>$1</code>')
-		.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-		.replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
-		.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, href) => {
-			const external = /^https?:/.test(href);
+	const code: string[] = [];
+	const out = escape(s)
+		.replace(/`([^`]+)`/g, (_, c) => `\u0000${code.push(`<code>${c}</code>`) - 1}\u0000`)
+		.replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, '<strong>$1</strong>')
+		.replace(/(^|[^*\w])\*(?=\S)([^*]*?\S)\*(?![*\w])/g, '$1<em>$2</em>')
+		.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_all, text, href) => {
+			if (!safeHref(href)) return text;
+			const external = /^https?:/i.test(href);
 			return `<a href="${href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
 		});
+	return out.replace(/\u0000(\d+)\u0000/g, (_, i) => code[+i]);
 }
 
 export function render(md: string) {

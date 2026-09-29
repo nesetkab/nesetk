@@ -129,7 +129,8 @@ img {
 	animation: rise 0.9s var(--d, 0ms) var(--out) both;
 }
 
-[data-inview='false'] .rise {
+.js [data-inview='false'] .rise,
+.js .rise[data-inview='false'] {
 	animation-play-state: paused;
 }
 

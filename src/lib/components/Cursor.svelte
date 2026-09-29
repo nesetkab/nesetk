@@ -28,14 +28,25 @@
 			}
 			const t = e.target as Element | null;
 			big = !!t?.closest?.('a, button, [data-grow]');
+			start();
 		};
 		const leave = () => (active = false);
 		const press = () => (down = true);
 		const release = () => (down = false);
 
+		const start = () => {
+			if (!frame) frame = requestAnimationFrame(tick);
+		};
 		const tick = () => {
+			frame = 0;
 			const dx = x - px;
 			const dy = y - py;
+			if (Math.hypot(dx, dy) < 0.1) {
+				px = x;
+				py = y;
+				el.style.transform = `translate3d(${px}px, ${py}px, 0) rotate(${angle}deg)`;
+				return;
+			}
 			px += dx * 0.22;
 			py += dy * 0.22;
 			if (Math.hypot(dx, dy) > 2) {
@@ -51,7 +62,6 @@
 		document.documentElement.addEventListener('pointerleave', leave);
 		addEventListener('pointerdown', press);
 		addEventListener('pointerup', release);
-		frame = requestAnimationFrame(tick);
 
 		return () => {
 			removeEventListener('pointermove', move);

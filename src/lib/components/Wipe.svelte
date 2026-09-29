@@ -36,13 +36,39 @@
 		height: `${b.s}px`
 	});
 
+	let run = 0;
+	let playing: Animation[] = [];
+
+	function stop() {
+		for (const a of playing) a.cancel();
+		playing = [];
+	}
+
+	function hide() {
+		stop();
+		el.style.display = 'none';
+		ui.wiping = false;
+	}
+
+	function overlayBox() {
+		const r = el.getBoundingClientRect();
+		return { x: r.left, y: r.top, s: r.width, fill: getComputedStyle(el).backgroundColor };
+	}
+
 	onNavigate((navigation) => {
-		if (reduced() || !navigation.to || navigation.to.url.pathname === navigation.from?.url.pathname) return;
+		const id = ++run;
+		const busy = el.style.display === 'block';
+
+		if (reduced() || !navigation.to || navigation.to.url.pathname === navigation.from?.url.pathname) {
+			if (busy) hide();
+			return;
+		}
 
 		const color = colorFor(navigation.to.url.pathname);
-		const from = heroBox() ?? { x: 0, y: 0, s: 0, fill: color };
+		const from = busy ? overlayBox() : (heroBox() ?? { x: 0, y: 0, s: 0, fill: color });
 		const full = fullBox();
 
+		stop();
 		ui.wiping = true;
 		el.style.display = 'block';
 
@@ -54,32 +80,45 @@
 				],
 				{ duration: 620, easing: 'cubic-bezier(0.7, 0, 0.3, 1)', fill: 'forwards' }
 			);
+			playing.push(cover);
 
-			cover.finished.then(async () => {
-				resolve();
-				await navigation.complete;
-				await tick();
-				await new Promise(requestAnimationFrame);
+			cover.finished.then(
+				async () => {
+					resolve();
+					try {
+						await navigation.complete;
+					} catch {
+						if (id === run) hide();
+						return;
+					}
+					if (id !== run) return;
+					await tick();
+					await new Promise(requestAnimationFrame);
+					if (id !== run) return;
 
-				const to = heroBox();
-				const uncover = el.animate(
-					to
-						? [
-								{ ...frame(full), backgroundColor: color },
-								{ ...frame(to), backgroundColor: to.fill || color }
-							]
-						: [
-								{ ...frame(full), opacity: 1 },
-								{ ...frame(full), opacity: 0 }
-							],
-					{ duration: 700, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' }
-				);
-				await uncover.finished;
-				el.style.display = 'none';
-				cover.cancel();
-				uncover.cancel();
-				ui.wiping = false;
-			});
+					const to = heroBox();
+					const uncover = el.animate(
+						to
+							? [
+									{ ...frame(full), backgroundColor: color },
+									{ ...frame(to), backgroundColor: to.fill || color }
+								]
+							: [
+									{ ...frame(full), opacity: 1 },
+									{ ...frame(full), opacity: 0 }
+								],
+						{ duration: 700, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' }
+					);
+					playing.push(uncover);
+					try {
+						await uncover.finished;
+					} catch {
+						return;
+					}
+					if (id === run) hide();
+				},
+				() => resolve()
+			);
 		});
 	});
 </script>

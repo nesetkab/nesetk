@@ -21,39 +21,53 @@
 	let target = { x: 0, y: 0 };
 	let pos = { x: 0, y: 0 };
 	let vel = { x: 0, y: 0 };
+	let size = { w: 430, h: 172 };
 	let placed = false;
+	let frame = 0;
+
+	function start() {
+		if (!frame && card) frame = requestAnimationFrame(tick);
+	}
+
+	function tick() {
+		frame = 0;
+		const still = reduced();
+		const k = still ? 1 : 0.16;
+		const damp = still ? 0 : 0.72;
+		let tx = target.x + 28;
+		let ty = target.y + 28;
+		if (tx + size.w > innerWidth - 16) tx = target.x - size.w - 28;
+		if (ty + size.h > innerHeight - 16) ty = target.y - size.h - 28;
+		vel.x = vel.x * damp + (tx - pos.x) * k;
+		vel.y = vel.y * damp + (ty - pos.y) * k;
+		pos.x += vel.x;
+		pos.y += vel.y;
+		const lean = Math.max(-12, Math.min(12, vel.x * 0.35));
+		card.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) rotate(${lean}deg)`;
+		const settled =
+			Math.abs(vel.x) + Math.abs(vel.y) < 0.05 && Math.abs(tx - pos.x) + Math.abs(ty - pos.y) < 0.5;
+		if (!settled) frame = requestAnimationFrame(tick);
+	}
+
+	$effect(() => {
+		if (project) start();
+	});
 
 	onMount(() => {
-		let frame = 0;
 		const move = (e: PointerEvent) => {
 			target = { x: e.clientX, y: e.clientY };
 			if (!placed) {
 				pos = { ...target };
 				placed = true;
 			}
+			if (project) start();
 		};
-		const tick = () => {
-			const still = reduced();
-			const k = still ? 1 : 0.16;
-			const damp = still ? 0 : 0.72;
-			const w = card.offsetWidth;
-			const h = card.offsetHeight;
-			let tx = target.x + 28;
-			let ty = target.y + 28;
-			if (tx + w > innerWidth - 16) tx = target.x - w - 28;
-			if (ty + h > innerHeight - 16) ty = target.y - h - 28;
-			vel.x = vel.x * damp + (tx - pos.x) * k;
-			vel.y = vel.y * damp + (ty - pos.y) * k;
-			pos.x += vel.x;
-			pos.y += vel.y;
-			const lean = Math.max(-12, Math.min(12, vel.x * 0.35));
-			card.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) rotate(${lean}deg)`;
-			frame = requestAnimationFrame(tick);
-		};
+		const ro = new ResizeObserver(() => (size = { w: card.offsetWidth, h: card.offsetHeight }));
+		ro.observe(card);
 		addEventListener('pointermove', move, { passive: true });
-		frame = requestAnimationFrame(tick);
 		return () => {
 			removeEventListener('pointermove', move);
+			ro.disconnect();
 			cancelAnimationFrame(frame);
 		};
 	});

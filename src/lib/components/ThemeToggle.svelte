@@ -21,6 +21,9 @@
 	function apply(next: boolean) {
 		dark = next;
 		document.documentElement.dataset.theme = next ? 'dark' : 'light';
+		for (const m of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) {
+			m.content = next ? '#0b0b0c' : '#ffffff';
+		}
 		try {
 			localStorage.setItem('theme', next ? 'dark' : 'light');
 		} catch {}
