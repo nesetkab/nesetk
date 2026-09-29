@@ -116,7 +116,8 @@ export const links: Link[] = [
 	{ title: 'discord', href: 'https://discord.com/users/1009005900821954644' },
 	{ title: 'github', href: 'https://github.com/nesetkab' },
 	{ title: 'linkedin', href: 'https://www.linkedin.com/in/neset-kablan' },
-	{ title: 'twitter' }
+	{ title: 'twitter' },
+	{ title: 'resume', href: '/resume' }
 ];
 
 /** every accent the site uses, for confetti and the hero color cycle */

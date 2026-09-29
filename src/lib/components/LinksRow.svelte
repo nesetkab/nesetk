@@ -8,6 +8,9 @@
 	let { links, labelWidth = 179, delay = 0 }: { links: Link[]; labelWidth?: number; delay?: number } = $props();
 
 	let turn = $state(0);
+
+	/** web links and files open in a new tab; site pages and mailto links stay put */
+	const opensTab = (href: string) => /^https?:/.test(href) || href.endsWith('.pdf');
 </script>
 
 <Row rot={0} size={47} label="links" {labelWidth} center hover="none" {turn} {delay}>
@@ -17,8 +20,8 @@
 				{#if link.href}
 					<a
 						href={link.href}
-						target="_blank"
-						rel="noopener noreferrer"
+						target={opensTab(link.href) ? '_blank' : undefined}
+						rel={opensTab(link.href) ? 'noopener noreferrer' : undefined}
 						onpointerenter={() => (turn = (i + 1) * 90)}
 						onpointerleave={() => (turn = 0)}
 						onfocus={() => (turn = (i + 1) * 90)}
