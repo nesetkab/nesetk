@@ -29,7 +29,7 @@ export const projects: Project[] = [
 		title: 'philidor',
 		tags: 'python, ML',
 		color: '#1fc86b',
-		description: 'a chess engine that plays for the draw against any opponent',
+		description: 'a chess agent that plays for draws, picking the move with the highest draw probability',
 		images: [],
 		links: [{ title: 'github', href: 'https://github.com/nesetkab/philidor' }]
 	},
@@ -52,11 +52,11 @@ export const projects: Project[] = [
 		links: [{ title: 'github', href: 'https://github.com/nesetkab/thehive' }]
 	},
 	{
-		slug: 'chip-design',
-		title: 'chip design',
-		tags: 'verilog, idk, something sum',
+		slug: 'motor-asic',
+		title: 'motor asic',
+		tags: 'verilog, openlane, tiny tapeout',
 		color: '#00b8b0',
-		description: 'an ongoing dive into digital logic and chip design',
+		description: 'a closed-loop motor controller in Verilog, taped out on SkyWater 130 nm silicon',
 		images: [],
 		links: []
 	},
