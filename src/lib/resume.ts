@@ -17,6 +17,14 @@ export const education: Entry[] = [
 		where: 'Boston, MA',
 		when: 'Sep 2026 – expected May 2030',
 		points: []
+	},
+	// on the page only, not in the pdf
+	{
+		title: 'Beehive Science & Technology Academy',
+		tags: 'High school',
+		where: 'Sandy, UT',
+		when: 'graduated 2026',
+		points: []
 	}
 ];
 
