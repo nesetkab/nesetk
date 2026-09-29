@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>{page.status} | neset</title>
+	<title>{page.status} | neşet</title>
 </svelte:head>
 
 <main class="page">

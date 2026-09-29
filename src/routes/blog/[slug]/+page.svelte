@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>{post.title} | neset</title>
+	<title>{post.title} | neşet</title>
 	<meta name="description" content={post.tldr || post.title} />
 </svelte:head>
 
