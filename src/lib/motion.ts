@@ -29,12 +29,3 @@ export const onenter: Action<HTMLElement, () => void> = (node, fn) => {
 		destroy: () => node.removeEventListener('pointerenter', handle)
 	};
 };
-
-export const clicks: Action<HTMLElement, (e: MouseEvent) => void> = (node, fn) => {
-	const handle = (e: MouseEvent) => fn(e);
-	node.addEventListener('click', handle);
-	return {
-		update: (next) => (fn = next),
-		destroy: () => node.removeEventListener('click', handle)
-	};
-};

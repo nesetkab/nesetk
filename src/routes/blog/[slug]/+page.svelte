@@ -3,7 +3,7 @@
 	import Row from '$lib/components/Row.svelte';
 	import Progress from '$lib/components/Progress.svelte';
 	import Lightbox from '$lib/components/Lightbox.svelte';
-	import { clicks, inview } from '$lib/motion';
+	import { inview } from '$lib/motion';
 
 	let { data } = $props();
 	let post = $derived(data.post);
@@ -32,7 +32,8 @@
 		</Row>
 	{/if}
 
-	<article class="body rise" style:--d="450ms" data-inview="false" use:inview use:clicks={zoom}>
+	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+	<article class="body rise" style:--d="450ms" data-inview="false" use:inview onclick={zoom}>
 		{@html body.html}
 	</article>
 
