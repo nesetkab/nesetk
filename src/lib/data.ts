@@ -13,7 +13,7 @@ export type Project = {
 
 export const HOME_COLOR = '#007fff';
 
-/** order matters: the home page lays these out in a zig-zag, bottom first */
+/** order matters: the home page lays these out in rows of five, zig-zagging bottom first */
 export const projects: Project[] = [
 	{
 		slug: 'pitstop',
@@ -59,6 +59,56 @@ export const projects: Project[] = [
 		description: 'an ongoing dive into digital logic and chip design',
 		images: [],
 		links: []
+	},
+	// filler projects for testing the layout; delete everything with a filler- slug
+	{
+		slug: 'filler-pixel-clock',
+		title: 'pixel clock',
+		tags: 'c, esp32',
+		color: '#ff4d4d',
+		description: 'Filler project. An LED matrix clock.',
+		images: [],
+		links: [{ title: 'github', href: 'https://github.com/nesetkab' }]
+	},
+	{
+		slug: 'filler-tiny-gpu',
+		title: 'tiny gpu',
+		tags: 'verilog',
+		color: '#ff8a4b',
+		description:
+			'Filler project with a longer description, to see how the hover card handles text that runs a few lines longer than the others.',
+		images: [],
+		links: []
+	},
+	{
+		slug: 'filler-notes',
+		title: 'notes',
+		tags: 'rust',
+		color: '#1fc86b',
+		description: 'Filler. Short.',
+		images: [],
+		links: []
+	},
+	{
+		slug: 'filler-long-name',
+		title: 'long project name',
+		tags: 'typescript, next, tailwind, postgres',
+		color: '#8a5cff',
+		description: 'Filler project with a long name and many tags.',
+		images: [],
+		links: [
+			{ title: 'github', href: 'https://github.com/nesetkab' },
+			{ title: 'website', href: 'https://example.com' }
+		]
+	},
+	{
+		slug: 'filler-robot-arm',
+		title: 'robot arm',
+		tags: 'c++, ROS',
+		color: '#007fff',
+		description: 'Filler project. A six-axis arm made of 3D printed parts.',
+		images: [],
+		links: [{ title: 'discord' }, { title: 'github', href: 'https://github.com/nesetkab' }]
 	}
 ];
 

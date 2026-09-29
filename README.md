@@ -26,5 +26,10 @@ npm run build    # static site in build/
 ## Things to try
 
 - Click the big quarter circle at the top of any page.
+- Switch between light and dark with the toggle in the top-right corner.
 - Hover the projects, the blog titles, and each link.
 - Hover or click the generated project patterns.
+
+## Filler content
+
+The projects and posts with a `filler-` slug are only there to test the layout. Delete the entries in `src/lib/data.ts` and the files in `src/lib/posts/` whose names start with `filler-`.

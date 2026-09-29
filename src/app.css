@@ -15,11 +15,29 @@
 	color-scheme: light dark;
 }
 
+/* dark follows the system unless the toggle picked a theme (data-theme on <html>) */
 @media (prefers-color-scheme: dark) {
-	:root {
+	:root:not([data-theme='light']) {
 		--bg: #0b0b0c;
 		--fg: #f4f4f4;
 	}
+}
+
+:root[data-theme='dark'] {
+	--bg: #0b0b0c;
+	--fg: #f4f4f4;
+	color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+
+/* the theme switch draws its own wipe over the view transition snapshot */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
 }
 
 @media (max-width: 760px) {

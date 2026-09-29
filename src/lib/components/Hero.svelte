@@ -6,6 +6,7 @@
 	import type { Snippet } from 'svelte';
 	import Quarter from './Quarter.svelte';
 	import BackLink from './BackLink.svelte';
+	import ThemeToggle from './ThemeToggle.svelte';
 	import { burst } from '$lib/confetti';
 	import { palette } from '$lib/data';
 
@@ -45,7 +46,10 @@
 	<div class="text" style:--off={offset}>
 		{@render children()}
 	</div>
-	{#if back}<BackLink />{/if}
+	<div class="corner">
+		<ThemeToggle />
+		{#if back}<BackLink />{/if}
+	</div>
 </header>
 
 <style>
@@ -78,6 +82,15 @@
 		min-width: 0;
 	}
 
+	.corner {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		gap: calc(40 * var(--u));
+	}
+
 	@media (max-width: 760px) {
 		.hero {
 			flex-direction: column;
@@ -89,6 +102,18 @@
 
 		.text {
 			margin-left: 0;
+		}
+
+		.corner {
+			position: static;
+			order: -1;
+			align-self: stretch;
+			justify-content: space-between;
+			margin-bottom: 4px;
+		}
+
+		.corner > :global(:only-child) {
+			margin-left: auto;
 		}
 	}
 </style>

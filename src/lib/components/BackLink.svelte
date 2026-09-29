@@ -9,9 +9,6 @@
 
 <style>
 	.back {
-		position: absolute;
-		top: 0;
-		right: 0;
 		display: flex;
 		align-items: center;
 		gap: calc(6 * var(--u));
@@ -41,11 +38,7 @@
 
 	@media (max-width: 760px) {
 		.back {
-			position: static;
-			align-self: flex-end;
 			font-size: 18px;
-			order: -1;
-			margin-bottom: 8px;
 		}
 	}
 </style>
