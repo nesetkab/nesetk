@@ -3,12 +3,11 @@
 	import Row from '$lib/components/Row.svelte';
 	import Progress from '$lib/components/Progress.svelte';
 	import Lightbox from '$lib/components/Lightbox.svelte';
-	import { render } from '$lib/markdown';
 	import { clicks, inview } from '$lib/motion';
 
 	let { data } = $props();
 	let post = $derived(data.post);
-	let body = $derived(render(post.body));
+	let body = $derived(data.body);
 	let lightbox = $state<Lightbox>();
 
 	function zoom(e: MouseEvent) {
@@ -40,7 +39,7 @@
 	<Progress />
 
 	{#if body.images.length}
-		<Lightbox bind:this={lightbox} images={body.images} title={post.title} />
+		<Lightbox bind:this={lightbox} images={body.images} alts={body.alts} title={post.title} />
 	{/if}
 </main>
 
@@ -71,9 +70,7 @@
 		margin-top: 1.1em;
 	}
 
-	.body :global(h2),
-	.body :global(h3),
-	.body :global(h4) {
+	.body :global(:is(h2, h3, h4, h5, h6)) {
 		font-weight: 700;
 		line-height: 1.1;
 		margin-top: 1.6em;
@@ -81,6 +78,19 @@
 
 	.body :global(h2) {
 		font-size: 1.5em;
+	}
+
+	.body :global(h4) {
+		font-size: 0.9em;
+	}
+
+	.body :global(h5) {
+		font-size: 0.8em;
+	}
+
+	.body :global(h6) {
+		font-size: 0.8em;
+		color: var(--muted);
 	}
 
 	.body :global(a) {
@@ -96,10 +106,45 @@
 		padding-left: 1.1em;
 	}
 
+	.body :global(ol) {
+		padding-left: 1.4em;
+	}
+
+	.body :global(li > :is(ul, ol)) {
+		margin-top: 0.2em;
+	}
+
+	.body :global(ol > li::marker) {
+		font-variant-numeric: tabular-nums;
+	}
+
+	.body :global(li:has(> input[type='checkbox'])) {
+		list-style: none;
+	}
+
+	.body :global(input[type='checkbox']) {
+		appearance: none;
+		width: 0.75em;
+		height: 0.75em;
+		margin: 0 0.45em 0 -1.1em;
+		vertical-align: -0.05em;
+		border: 0.09em solid var(--fg);
+		border-radius: 0 0 100% 0;
+	}
+
+	.body :global(input[type='checkbox']:checked) {
+		background: var(--accent);
+		border-color: var(--accent);
+	}
+
 	.body :global(blockquote) {
 		border-left: 0.2em solid var(--accent);
 		padding-left: 0.8em;
 		color: var(--muted);
+	}
+
+	.body :global(blockquote > * + *) {
+		margin-top: 0.6em;
 	}
 
 	.body :global(code) {
@@ -116,11 +161,76 @@
 		padding: 1em;
 		border-radius: 8px;
 		overflow-x: auto;
+		tab-size: 2;
 	}
 
 	.body :global(pre code) {
 		background: none;
 		padding: 0;
+	}
+
+	.body :global(table) {
+		display: block;
+		max-width: 100%;
+		overflow-x: auto;
+		border-collapse: collapse;
+		font-size: 0.8em;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.body :global(:is(th, td)) {
+		padding: 0.45em 1em 0.45em 0;
+		border-bottom: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+	}
+
+	.body :global(th) {
+		font-weight: 700;
+		border-bottom-color: var(--fg);
+	}
+
+	.body :global(th:not([align])) {
+		text-align: left;
+	}
+
+	.body :global(hr) {
+		border: 0;
+		border-top: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+		margin: 2em 0;
+	}
+
+	.body :global(:is(del, s)) {
+		color: var(--muted);
+	}
+
+	.body :global(u) {
+		text-underline-offset: 0.15em;
+	}
+
+	.body :global(small) {
+		font-size: 0.8em;
+		color: var(--muted);
+	}
+
+	.body :global(:is(sub, sup)) {
+		line-height: 0;
+	}
+
+	.body :global(kbd) {
+		font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+		font-size: 0.75em;
+		letter-spacing: 0;
+		padding: 0.1em 0.4em;
+		border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
+		border-bottom-width: 2px;
+		border-radius: 4px;
+		background: var(--faint);
+	}
+
+	.body :global(mark) {
+		color: inherit;
+		background: color-mix(in srgb, var(--accent) 35%, transparent);
+		padding: 0 0.15em;
+		border-radius: 2px;
 	}
 
 	.body :global(figure) {
@@ -129,19 +239,18 @@
 
 	.body :global(.zoom) {
 		display: block;
-		width: 100%;
+		width: fit-content;
+		max-width: 100%;
 		border-radius: 8px;
 	}
 
 	.body :global(p .zoom) {
 		display: inline-block;
-		width: auto;
-		max-width: 100%;
 		vertical-align: middle;
 	}
 
 	.body :global(.zoom img) {
-		width: 100%;
+		max-width: 100%;
 		height: auto;
 	}
 

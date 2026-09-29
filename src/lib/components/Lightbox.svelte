@@ -2,7 +2,7 @@
 	import { tick } from 'svelte';
 	import { reduced } from '$lib/motion';
 
-	let { images, title }: { images: string[]; title: string } = $props();
+	let { images, alts = [], title }: { images: string[]; alts?: string[]; title: string } = $props();
 
 	let dialog: HTMLDialogElement;
 	let img: HTMLImageElement;
@@ -80,9 +80,9 @@
 	}
 </script>
 
-<dialog class="lightbox" bind:this={dialog} oncancel={cancel} onkeydown={key} aria-label="{title} screenshots">
+<dialog class="lightbox" bind:this={dialog} oncancel={cancel} onkeydown={key} aria-label="{title} images">
 	<button type="button" class="stage" onclick={close} tabindex="-1" aria-label="close">
-		<img bind:this={img} src={images[index]} alt="{title} screenshot {index + 1}" />
+		<img bind:this={img} src={images[index]} alt={alts[index] || `${title} image ${index + 1}`} />
 	</button>
 	<div class="bar">
 		{#if images.length > 1}
@@ -132,6 +132,7 @@
 		flex: 1;
 		min-height: 0;
 		display: grid;
+		grid-template: minmax(0, 1fr) / minmax(0, 1fr);
 		place-items: center;
 		padding: 5vh 4vw 0;
 		cursor: zoom-out;
@@ -139,7 +140,7 @@
 
 	img {
 		max-width: 100%;
-		max-height: calc(100dvh - 5vh - 96px);
+		max-height: 100%;
 		object-fit: contain;
 		border-radius: 8px;
 		box-shadow: 0 0 0 1px color-mix(in srgb, var(--fg) 14%, transparent);
