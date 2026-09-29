@@ -25,6 +25,16 @@
 	}
 
 	const name = 'neset'.split('');
+
+	function rows<T>(items: T[], n: number) {
+		const out: (T | null)[][] = [];
+		for (let i = 0; i < items.length; i += n) {
+			const row: (T | null)[] = items.slice(i, i + n);
+			while (row.length < n) row.push(null);
+			out.push(row);
+		}
+		return out;
+	}
 </script>
 
 <svelte:head>
@@ -89,23 +99,32 @@
 		color={hoveredPost?.color ?? 'var(--fg)'}
 		bind:quarter={blogsQuarter}
 	>
-		<ul class="posts" class:dim={!!hoveredPost}>
-			{#each posts as p, i}
-				<li class:active={hoveredPost === p}>
-					<a
-						class="post rise"
-						href="/blog/{p.slug}"
-						style:--d="{520 + i * 90}ms"
-						style:--c={p.color}
-						onpointerenter={() => enterPost(p)}
-						onpointerleave={() => (hoveredPost = null)}
-					>
-						<span class="pip" aria-hidden="true"></span>
-						{#each p.lines as line}<span class="line">{line}</span>{/each}
-					</a>
-				</li>
+		<div class="posts" class:dim={!!hoveredPost}>
+			{#each rows(posts, 3) as row, r}
+				<ul class="brow">
+					{#each row as p, c}
+						{@const i = r * 3 + c}
+						{#if p}
+							<li class:active={hoveredPost === p}>
+								<a
+									class="post rise"
+									href="/blog/{p.slug}"
+									style:--d="{520 + i * 90}ms"
+									style:--c={p.color}
+									onpointerenter={() => enterPost(p)}
+									onpointerleave={() => (hoveredPost = null)}
+								>
+									<span class="pip" aria-hidden="true"></span>
+									{#each p.lines as line}<span class="line">{line}</span>{/each}
+								</a>
+							</li>
+						{:else}
+							<li class="spacer" aria-hidden="true"></li>
+						{/if}
+					{/each}
+				</ul>
 			{/each}
-		</ul>
+		</div>
 	</Row>
 
 	<LinksRow {links} labelWidth={179} delay={450} />
@@ -181,11 +200,13 @@
 
 	.projects {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
-		height: 100%;
+		gap: calc(30 * var(--u)) calc(28 * var(--u));
 	}
 
 	.projects li {
+		height: calc(95 * var(--u));
 		display: flex;
 		align-items: flex-end;
 		transition: opacity 0.3s ease;
@@ -206,12 +227,14 @@
 	}
 
 	.tags {
+		white-space: nowrap;
 		font-size: calc(13 * var(--u));
 		line-height: 1.2;
 		padding-left: calc(1 * var(--u));
 	}
 
 	.ptitle {
+		white-space: nowrap;
 		font-size: calc(36 * var(--u));
 		line-height: 1.05;
 		transition: color 0.3s ease;
@@ -223,8 +246,19 @@
 
 	.posts {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
+		gap: calc(28 * var(--u));
 		padding-top: calc(8 * var(--u));
+	}
+
+	.brow {
+		display: flex;
+		justify-content: space-between;
+		gap: calc(40 * var(--u));
+	}
+
+	.spacer {
+		width: 0;
 	}
 
 	.posts li {
@@ -283,9 +317,19 @@
 			gap: 20px 16px;
 		}
 
+		.spacer {
+			display: none;
+		}
+
 		.projects li,
 		.projects li.up {
+			height: auto;
 			align-items: flex-start;
+		}
+
+		.ptitle,
+		.tags {
+			white-space: normal;
 		}
 
 		.up .project {
@@ -301,7 +345,8 @@
 			font-size: 28px;
 		}
 
-		.posts {
+		.posts,
+		.brow {
 			flex-direction: column;
 			gap: 18px;
 			padding: 0;
