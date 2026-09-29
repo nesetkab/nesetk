@@ -71,7 +71,8 @@
 					to
 						? [
 								{ ...frame(full), backgroundColor: color },
-								{ ...frame(to), backgroundColor: color }
+								// end on the real hero color, for pages colorFor does not know (like a 404)
+								{ ...frame(to), backgroundColor: to.fill || color }
 							]
 						: [
 								{ ...frame(full), opacity: 1 },
