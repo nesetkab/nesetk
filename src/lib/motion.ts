@@ -20,3 +20,12 @@ export const inview: Action<HTMLElement, ((visible: boolean) => void) | undefine
 	io.observe(node);
 	return { destroy: () => io.disconnect() };
 };
+
+export const onenter: Action<HTMLElement, () => void> = (node, fn) => {
+	const handle = () => fn();
+	node.addEventListener('pointerenter', handle);
+	return {
+		update: (next) => (fn = next),
+		destroy: () => node.removeEventListener('pointerenter', handle)
+	};
+};

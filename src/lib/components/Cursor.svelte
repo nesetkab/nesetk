@@ -27,7 +27,7 @@
 				active = true;
 			}
 			const t = e.target as Element | null;
-			big = !!t?.closest?.('a, button, [data-grow]');
+			big = !!t?.closest?.('a, button');
 			start();
 		};
 		const leave = () => (active = false);

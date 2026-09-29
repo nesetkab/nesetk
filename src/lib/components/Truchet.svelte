@@ -6,7 +6,7 @@
 
 	type Tile = { r: number; bg: number; fg: number; delay: number };
 
-	let box: HTMLDivElement;
+	let box: HTMLButtonElement;
 	let cols = $state(0);
 	let rows = $state(0);
 	let side = $state(0);
@@ -50,6 +50,14 @@
 		tiles[i].r += 1;
 	}
 
+	let over = -1;
+
+	function hover(e: PointerEvent) {
+		const i = Number((e.target as HTMLElement).closest<HTMLElement>('[data-i]')?.dataset.i ?? -1);
+		if (i >= 0 && i !== over) turn(i);
+		over = i;
+	}
+
 	function wave(e: MouseEvent) {
 		const rect = box.getBoundingClientRect();
 		const cx = ((e.clientX - rect.left) / rect.width) * cols;
@@ -81,7 +89,8 @@
 	});
 </script>
 
-<div
+<button
+	type="button"
 	class="truchet"
 	class:visible
 	bind:this={box}
@@ -90,21 +99,16 @@
 	style:--rows={rows}
 	style:--t="{side}px"
 	onclick={wave}
-	role="img"
+	onpointerover={hover}
+	onpointerleave={() => (over = -1)}
 	aria-label={label}
-	data-grow
 >
 	{#each tiles as t, i}
-		<div
-			class="tile"
-			style:background={swatches[t.bg]}
-			style:--i={(i % cols) + Math.floor(i / cols)}
-			onpointerenter={() => turn(i)}
-		>
+		<div class="tile" data-i={i} style:background={swatches[t.bg]} style:--i={(i % cols) + Math.floor(i / cols)}>
 			<div class="q" style:background={swatches[t.fg]} style:rotate="{t.r * 90}deg" style:transition-delay="{t.delay}ms"></div>
 		</div>
 	{/each}
-</div>
+</button>
 
 <style>
 	.truchet {

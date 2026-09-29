@@ -31,7 +31,7 @@
 				{#if project.images[i]}
 					<img src={project.images[i]} alt="{project.title} screenshot {i + 1}" loading="lazy" />
 				{:else}
-					<Truchet color={project.color} seed={seed + i} label="{project.title} pattern" />
+					<Truchet color={project.color} seed={seed + i} label="shuffle the {project.title} pattern" />
 				{/if}
 			</figure>
 		{/each}
