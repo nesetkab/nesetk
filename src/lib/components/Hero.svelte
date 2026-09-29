@@ -1,9 +1,9 @@
 <!--
 	The big quarter circle at the top of every page, with the page title beside it.
-	Click the quarter: it spins, changes color, and throws confetti.
+	Click the quarter: it spins, changes color, and throws confetti. The page accent follows its color.
 -->
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { untrack, type Snippet } from 'svelte';
 	import Quarter from './Quarter.svelte';
 	import BackLink from './BackLink.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
@@ -29,6 +29,19 @@
 		clicks === 0 ? color : palette.filter((c) => c !== color)[(clicks - 1) % (palette.length - 1)]
 	);
 
+	let header: HTMLElement;
+
+	// a new page (same component, new color) starts over from its own color
+	$effect(() => {
+		color;
+		untrack(() => (clicks = 0));
+	});
+
+	// the accent (selection, underlines, bullets, focus rings) always matches the quarter
+	$effect(() => {
+		header.closest('main')?.style.setProperty('--accent', current);
+	});
+
 	function play(e: MouseEvent) {
 		clicks++;
 		quarter.spin();
@@ -39,7 +52,7 @@
 	}
 </script>
 
-<header class="hero">
+<header class="hero" bind:this={header}>
 	<button class="hit" onclick={play} aria-label="spin the quarter circle">
 		<Quarter bind:this={quarter} size={190} color={current} intro="grow" hero />
 	</button>

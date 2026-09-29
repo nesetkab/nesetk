@@ -5,7 +5,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let { color }: { color: string } = $props();
+	/** defaults to the page accent, so it follows the hero quarter */
+	let { color = 'var(--accent)' }: { color?: string } = $props();
 
 	let p = $state(0);
 	let scrollable = $state(false);

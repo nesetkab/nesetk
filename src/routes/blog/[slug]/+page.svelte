@@ -29,9 +29,9 @@
 	<article class="body rise" style:--d="450ms" data-inview="false" use:inview>
 		{@html html}
 	</article>
-</main>
 
-<Progress color={post.color} />
+	<Progress />
+</main>
 
 <style>
 	h1 {
