@@ -20,6 +20,7 @@
 	}
 
 	function enterPost(p: Post) {
+		if (!canHover()) return;
 		if (hoveredPost !== p) blogsQuarter?.pop();
 		hoveredPost = p;
 	}

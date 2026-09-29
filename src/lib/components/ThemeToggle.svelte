@@ -24,6 +24,10 @@
 	function apply(next: boolean) {
 		dark = next;
 		document.documentElement.dataset.theme = next ? 'dark' : 'light';
+		// the browser bar (theme-color) follows the chosen theme, not the system one
+		for (const m of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) {
+			m.content = next ? '#0b0b0c' : '#ffffff';
+		}
 		try {
 			localStorage.setItem('theme', next ? 'dark' : 'light');
 		} catch {}

@@ -22,9 +22,9 @@
 
 	let quarter: Quarter;
 	let clicks = $state(0);
-	let current = $derived(
-		clicks === 0 ? color : palette.filter((c) => c !== color)[(clicks - 1) % (palette.length - 1)]
-	);
+	// the palette minus the page's own color (if it is in there at all)
+	let others = $derived(palette.filter((c) => c.toLowerCase() !== color.toLowerCase()));
+	let current = $derived(clicks === 0 ? color : others[(clicks - 1) % others.length]);
 
 	let header: HTMLElement;
 

@@ -41,13 +41,43 @@
 		height: `${b.s}px`
 	});
 
+	// each navigation gets a number; a newer one takes over the overlay and the older one backs off
+	let run = 0;
+	let playing: Animation[] = [];
+
+	function stop() {
+		for (const a of playing) a.cancel();
+		playing = [];
+	}
+
+	function hide() {
+		stop();
+		el.style.display = 'none';
+		ui.wiping = false;
+	}
+
+	/** where the overlay is right now, mid-animation included */
+	function overlayBox() {
+		const r = el.getBoundingClientRect();
+		return { x: r.left, y: r.top, s: r.width, fill: getComputedStyle(el).backgroundColor };
+	}
+
 	onNavigate((navigation) => {
-		if (reduced() || !navigation.to || navigation.to.url.pathname === navigation.from?.url.pathname) return;
+		const id = ++run;
+		const busy = el.style.display === 'block';
+
+		if (reduced() || !navigation.to || navigation.to.url.pathname === navigation.from?.url.pathname) {
+			// a navigation that skips the wipe still clears one left over from an interrupted navigation
+			if (busy) hide();
+			return;
+		}
 
 		const color = colorFor(navigation.to.url.pathname);
-		const from = heroBox() ?? { x: 0, y: 0, s: 0, fill: color };
+		// if an earlier wipe is still on screen, carry on from where it is instead of snapping back
+		const from = busy ? overlayBox() : (heroBox() ?? { x: 0, y: 0, s: 0, fill: color });
 		const full = fullBox();
 
+		stop();
 		ui.wiping = true;
 		el.style.display = 'block';
 
@@ -59,33 +89,48 @@
 				],
 				{ duration: 620, easing: 'cubic-bezier(0.7, 0, 0.3, 1)', fill: 'forwards' }
 			);
+			playing.push(cover);
 
-			cover.finished.then(async () => {
-				resolve();
-				await navigation.complete;
-				await tick();
-				await new Promise(requestAnimationFrame);
+			cover.finished.then(
+				async () => {
+					resolve();
+					try {
+						await navigation.complete;
+					} catch {
+						// aborted: if nothing newer took over, take the overlay down
+						if (id === run) hide();
+						return;
+					}
+					if (id !== run) return;
+					await tick();
+					await new Promise(requestAnimationFrame);
+					if (id !== run) return;
 
-				const to = heroBox();
-				const uncover = el.animate(
-					to
-						? [
-								{ ...frame(full), backgroundColor: color },
-								// end on the real hero color, for pages colorFor does not know (like a 404)
-								{ ...frame(to), backgroundColor: to.fill || color }
-							]
-						: [
-								{ ...frame(full), opacity: 1 },
-								{ ...frame(full), opacity: 0 }
-							],
-					{ duration: 700, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' }
-				);
-				await uncover.finished;
-				el.style.display = 'none';
-				cover.cancel();
-				uncover.cancel();
-				ui.wiping = false;
-			});
+					const to = heroBox();
+					const uncover = el.animate(
+						to
+							? [
+									{ ...frame(full), backgroundColor: color },
+									// end on the real hero color, for pages colorFor does not know (like a 404)
+									{ ...frame(to), backgroundColor: to.fill || color }
+								]
+							: [
+									{ ...frame(full), opacity: 1 },
+									{ ...frame(full), opacity: 0 }
+								],
+						{ duration: 700, easing: 'cubic-bezier(0.65, 0, 0.2, 1)', fill: 'forwards' }
+					);
+					playing.push(uncover);
+					try {
+						await uncover.finished;
+					} catch {
+						return; // cancelled by a newer navigation, which owns the overlay now
+					}
+					if (id === run) hide();
+				},
+				// cancelled by a newer navigation: let this one go, the newer one owns the overlay
+				() => resolve()
+			);
 		});
 	});
 </script>

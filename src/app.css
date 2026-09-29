@@ -130,12 +130,16 @@ img {
 	background-size: 100% 100%;
 }
 
-/* text that rises into place; paused until its section scrolls into view */
+/*
+	text that rises into place; paused until its section scrolls into view.
+	Only with JS (the .js class from app.html), since only JS can unpause it; without JS it just plays.
+*/
 .rise {
 	animation: rise 0.9s var(--d, 0ms) var(--out) both;
 }
 
-[data-inview='false'] .rise {
+.js [data-inview='false'] .rise,
+.js .rise[data-inview='false'] {
 	animation-play-state: paused;
 }
 
