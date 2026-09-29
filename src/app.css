@@ -125,6 +125,63 @@ img {
 	background-size: 100% 100%;
 }
 
+.zoom {
+	position: relative;
+	overflow: hidden;
+	cursor: zoom-in;
+}
+
+:where(.zoom) img {
+	transition: scale 0.6s var(--spring);
+}
+
+.zoom:hover img,
+.zoom:focus-visible img {
+	scale: 1.05;
+}
+
+.peek {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	width: 84px;
+	aspect-ratio: 1;
+	padding: 0 12px 10px 0;
+	background: var(--accent);
+	border-radius: 100% 0 0 0;
+	-webkit-mask: radial-gradient(7.19% 7.19% at 100% 100%, #0000 97%, #000 100%);
+	mask: radial-gradient(7.19% 7.19% at 100% 100%, #0000 97%, #000 100%);
+	color: #000;
+	font-size: 17px;
+	letter-spacing: -0.04em;
+	transform-origin: 100% 100%;
+	scale: 0;
+	rotate: 45deg;
+	transition:
+		scale 0.5s var(--spring),
+		rotate 0.5s var(--spring);
+}
+
+.peek span {
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.zoom:hover .peek,
+.zoom:focus-visible .peek {
+	scale: 1;
+	rotate: 0deg;
+}
+
+.zoom:hover .peek span,
+.zoom:focus-visible .peek span {
+	opacity: 1;
+	transition-delay: 0.15s;
+}
+
 .rise {
 	animation: rise 0.9s var(--d, 0ms) var(--out) both;
 }

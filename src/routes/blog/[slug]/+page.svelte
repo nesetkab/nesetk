@@ -130,9 +130,7 @@
 	.body :global(.zoom) {
 		display: block;
 		width: 100%;
-		overflow: hidden;
 		border-radius: 8px;
-		cursor: zoom-in;
 	}
 
 	.body :global(p .zoom) {
@@ -145,12 +143,6 @@
 	.body :global(.zoom img) {
 		width: 100%;
 		height: auto;
-		transition: scale 0.6s var(--spring);
-	}
-
-	.body :global(.zoom:hover img),
-	.body :global(.zoom:focus-visible img) {
-		scale: 1.03;
 	}
 
 	@media (max-width: 760px) {

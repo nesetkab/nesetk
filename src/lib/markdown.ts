@@ -21,7 +21,7 @@ function inline(s: string, images: string[]) {
 			const i = images.push(src) - 1;
 			const label = alt ? `view image: ${alt}` : 'view image';
 			return hold(
-				`<button type="button" class="zoom" data-shot="${i}" aria-label="${label}"><img src="${src}" alt="${alt}" loading="lazy" /></button>`
+				`<button type="button" class="zoom" data-shot="${i}" aria-label="${label}"><img src="${src}" alt="${alt}" loading="lazy" /><span class="peek" aria-hidden="true"><span>view</span></span></button>`
 			);
 		})
 		.replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, '<strong>$1</strong>')

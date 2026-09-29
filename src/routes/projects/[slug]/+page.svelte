@@ -46,7 +46,7 @@
 				{#if project.images[i]}
 					<button
 						type="button"
-						class="view"
+						class="zoom"
 						data-shot={i}
 						onclick={() => lightbox?.show(i)}
 						onpointermove={pan}
@@ -110,13 +110,10 @@
 		grid-row: span 2;
 	}
 
-	.view {
-		position: relative;
+	.zoom {
 		display: block;
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
-		cursor: zoom-in;
 	}
 
 	img {
@@ -129,52 +126,6 @@
 			clip-path 1.1s var(--out) var(--d),
 			object-position 0.7s var(--out),
 			scale 0.6s var(--spring);
-	}
-
-	.view:hover img,
-	.view:focus-visible img {
-		scale: 1.06;
-	}
-
-	.peek {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		display: flex;
-		align-items: flex-end;
-		justify-content: flex-end;
-		width: 84px;
-		aspect-ratio: 1;
-		padding: 0 12px 10px 0;
-		background: var(--accent);
-		border-radius: 100% 0 0 0;
-		-webkit-mask: radial-gradient(7.19% 7.19% at 100% 100%, #0000 97%, #000 100%);
-		mask: radial-gradient(7.19% 7.19% at 100% 100%, #0000 97%, #000 100%);
-		color: #000;
-		font-size: 17px;
-		transform-origin: 100% 100%;
-		scale: 0;
-		rotate: 45deg;
-		transition:
-			scale 0.5s var(--spring),
-			rotate 0.5s var(--spring);
-	}
-
-	.peek span {
-		opacity: 0;
-		transition: opacity 0.2s ease;
-	}
-
-	.view:hover .peek,
-	.view:focus-visible .peek {
-		scale: 1;
-		rotate: 0deg;
-	}
-
-	.view:hover .peek span,
-	.view:focus-visible .peek span {
-		opacity: 1;
-		transition-delay: 0.15s;
 	}
 
 	.gallery:global([data-inview='true']) img {
