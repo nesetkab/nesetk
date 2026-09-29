@@ -16,7 +16,9 @@ export const inview: Action<HTMLElement, ((visible: boolean) => void) | undefine
 			cb?.(true);
 			io.disconnect();
 		},
-		{ rootMargin: '0px 0px -8% 0px' }
+		// a fixed margin, not a percentage: on a tall window a percentage can be bigger than the space under
+		// the last row, so that row could never count as visible, even when scrolled to the bottom
+		{ rootMargin: '0px 0px -40px 0px' }
 	);
 	io.observe(node);
 	return { destroy: () => io.disconnect() };
