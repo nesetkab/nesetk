@@ -80,7 +80,7 @@
 						disabled={solved}
 						aria-label="turn piece {i + 1}"
 					>
-						<Quarter size={110} rot={t * 90} color={solved ? COLOR : 'var(--fg)'} intro="drop" delay={400 + i * 110} />
+						<Quarter size={110} rot={t * 90} color={solved ? 'var(--accent)' : 'var(--fg)'} intro="drop" delay={400 + i * 110} />
 					</button>
 				{/each}
 			</div>
