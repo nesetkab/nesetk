@@ -24,7 +24,7 @@
 		hoveredPost = p;
 	}
 
-	const name = 'neset'.split('');
+	const name = [...'neşet'];
 
 	function rows<T>(items: T[], n: number) {
 		const out: (T | null)[][] = [];
@@ -38,18 +38,18 @@
 </script>
 
 <svelte:head>
-	<title>neset</title>
+	<title>neşet</title>
 	<meta
 		name="description"
-		content="neset: a Northeastern freshman studying EECE, interested in ML, semiconductors, and design."
+		content="neşet: a Northeastern freshman studying EECE, interested in ML, semiconductors, and design."
 	/>
 </svelte:head>
 
 <main class="page">
-	<Hero color={HOME_COLOR} offset={-3}>
+	<Hero color={HOME_COLOR}>
 		<h1>
 			<span class="hi rise" style:--d="250ms">hi, i’m</span>
-			<span class="name" aria-label="neset">
+			<span class="name" aria-label="neşet">
 				{#each name as letter, i}
 					<span class="mask"><span class="letter" style:--i={i}>{letter}</span></span>
 				{/each}
@@ -159,8 +159,8 @@
 	.mask {
 		display: block;
 		overflow: hidden;
-		padding: 0.08em 0.02em 0.06em;
-		margin: -0.08em -0.02em -0.06em;
+		padding: 0.08em 0.02em 0.24em;
+		margin: -0.08em -0.02em -0.24em;
 	}
 
 	.letter {
@@ -170,7 +170,7 @@
 
 	@keyframes up {
 		from {
-			translate: 0 110%;
+			translate: 0 140%;
 		}
 	}
 

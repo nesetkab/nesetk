@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<title>resume | neset</title>
+	<title>resume | neşet</title>
 	<meta name="description" content="Neşet Kablan's resume: electrical and computer engineering at Northeastern." />
 </svelte:head>
 

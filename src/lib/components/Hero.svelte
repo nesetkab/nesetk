@@ -8,12 +8,10 @@
 
 	let {
 		color,
-		offset = 14,
 		back = false,
 		children
 	}: {
 		color: string;
-		offset?: number;
 		back?: boolean;
 		children: Snippet;
 	} = $props();
@@ -49,7 +47,7 @@
 	<button class="hit" onclick={play} aria-label="spin the quarter circle">
 		<Quarter bind:this={quarter} size={190} color={current} intro="grow" hero />
 	</button>
-	<div class="text" style:--off={offset}>
+	<div class="text">
 		{@render children()}
 	</div>
 	<div class="corner">
@@ -84,7 +82,7 @@
 	}
 
 	.text {
-		margin-left: calc(var(--off) * var(--u));
+		margin-left: calc(14 * var(--u));
 		min-width: 0;
 	}
 
