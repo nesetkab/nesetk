@@ -66,7 +66,7 @@
 					to
 						? [
 								{ ...frame(full), backgroundColor: color },
-								{ ...frame(to), backgroundColor: color }
+								{ ...frame(to), backgroundColor: to.fill || color }
 							]
 						: [
 								{ ...frame(full), opacity: 1 },
