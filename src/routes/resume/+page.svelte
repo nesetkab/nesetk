@@ -31,8 +31,8 @@
 
 	<Row rot={180} hover="wobble" delay={150}>
 		<p class="about rise" style:--d="300ms">
-			everything on one page. or
-			<a class="download" href="/resume.pdf" target="_blank" rel="noopener">get the pdf</a>.
+			see everything here or<br />
+			<a class="download" href="/resume.pdf" target="_blank" rel="noopener">open the pdf</a>
 		</p>
 	</Row>
 
