@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import Quarter from './Quarter.svelte';
-	import { inview, onenter } from '$lib/motion';
+	import { inview } from '$lib/motion';
 
 	let {
 		rot = 180,
@@ -35,6 +35,7 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <section
 	class="row"
 	class:center
@@ -43,7 +44,7 @@
 	style:--d="{delay}ms"
 	data-inview="false"
 	use:inview
-	use:onenter={enter}
+	onpointerenter={enter}
 >
 	<div class="slot">
 		<Quarter bind:this={quarter} {size} {rot} {color} {turn} {delay} />
