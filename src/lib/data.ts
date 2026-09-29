@@ -19,7 +19,7 @@ export const projects: Project[] = [
 		tags: 'SQL, react, tsx',
 		color: '#ff7be5',
 		description: 'a customizable dashboard for competitive robotics (FTC)',
-		images: [],
+		images: ['/projects/pitstop-1.webp'],
 		links: [{ title: 'github', href: 'https://github.com/nesetkab/ftc-pitstop' }]
 	},
 	{

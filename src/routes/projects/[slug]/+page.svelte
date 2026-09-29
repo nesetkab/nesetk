@@ -84,6 +84,7 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: top;
 		clip-path: circle(0 at 0 0);
 		transition: clip-path 1.1s var(--out) var(--d);
 	}
