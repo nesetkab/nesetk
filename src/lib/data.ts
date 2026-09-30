@@ -40,6 +40,14 @@ export const projects: Project[] = [
 		tags: 'swift, swiftui, appkit',
 		color: '#007fff',
 		description: 'a tiny, fast spotify player for macos with a menu bar controller. it plays audio itself, so the spotify app never has to open',
+		when: 'Sep 2026 – present',
+		points: [
+			'Plays Spotify through a bundled librespot engine and AVAudioEngine, so volume changes are instant',
+			'Search, queue, playlists, liked songs, and a native menu bar controller',
+			'Gradient blobs behind the cover react live to the bass, mids, and highs of the song',
+			'Idles at 0% CPU by running every continuous animation on Core Animation',
+			'Installs with one Terminal command'
+		],
 		images: ['/projects/medtner-1.webp'],
 		links: [{ title: 'github', href: 'https://github.com/nesetkab/medtner' }]
 	},
