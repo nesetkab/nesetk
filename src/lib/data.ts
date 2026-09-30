@@ -35,6 +35,15 @@ export const projects: Project[] = [
 		]
 	},
 	{
+		slug: 'medtner',
+		title: 'medtner',
+		tags: 'swift, swiftui, appkit',
+		color: '#007fff',
+		description: 'a tiny, fast spotify player for macos with a menu bar controller. it plays audio itself, so the spotify app never has to open',
+		images: ['/projects/medtner-1.webp'],
+		links: [{ title: 'github', href: 'https://github.com/nesetkab/medtner' }]
+	},
+	{
 		slug: 'philidor',
 		title: 'philidor',
 		tags: 'python, ML',
