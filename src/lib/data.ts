@@ -116,7 +116,7 @@ export const projects: Project[] = [
     links: []
   },
   {
-    slug: 'robotics programming',
+    slug: 'robotics-programming',
     title: 'robotics programming',
     tags: 'java',
     color: '#ff8a4b',
