@@ -49,7 +49,7 @@ export const projects: Project[] = [
       'gradient animations react live to the bass, mids, and highs of the song',
       'idles at 0% CPU vs Spotify\'s 20% by running every continuous animation on Core Animation'
     ],
-    images: ['/projects/medtner-1.webp'],
+    images: ['/projects/medtner-1.webp', '/projects/medtner-2.webp'],
     links: [{ title: 'github', href: 'https://github.com/nesetkab/medtner' }]
   },
   {
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     links: []
   },
   {
-    slug: 'robotics programming',
+    slug: 'robotics-programming',
     title: 'robotics programming',
     tags: 'java',
     color: '#ff8a4b',
