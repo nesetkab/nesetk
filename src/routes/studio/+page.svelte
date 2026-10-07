@@ -3,6 +3,7 @@
 	import Row from '$lib/components/Row.svelte';
 	import LinksRow from '$lib/components/LinksRow.svelte';
 	import NotchMark from '$lib/components/NotchMark.svelte';
+	import '@fontsource/syne/latin-800.css';
 	import { burst } from '$lib/confetti';
 	import { palette } from '$lib/data';
 	import { inview } from '$lib/motion';
@@ -99,7 +100,7 @@
 <main class="page" style:--accent={STUDIO_COLOR}>
 	<Hero color={STUDIO_COLOR} back>
 		<p class="tags rise" style:--d="250ms">a web design studio by neşet</p>
-		<h1 class="rise" style:--d="330ms"><NotchMark size="0.78em" />notch</h1>
+		<h1 class="rise" style:--d="330ms"><NotchMark size="1.52em" /><span>notch<br />studio</span></h1>
 	</Hero>
 
 	<Row rot={180} hover="wobble" delay={150}>
@@ -283,16 +284,17 @@
 	h1 {
 		display: flex;
 		align-items: flex-end;
-		gap: 0.14em;
-		font-size: calc(96 * var(--u));
-		font-weight: 700;
-		line-height: 0.95;
-		letter-spacing: -0.04em;
-		padding-bottom: calc(6 * var(--u));
+		gap: 0.24em;
+		font-family: 'Syne', var(--font);
+		font-size: calc(64 * var(--u));
+		font-weight: 800;
+		line-height: 0.82;
+		letter-spacing: -0.02em;
+		padding-bottom: calc(4 * var(--u));
 	}
 
 	h1 :global(svg) {
-		margin-bottom: 0.06em;
+		margin-bottom: 0.1em;
 	}
 
 	.anchor {
@@ -752,7 +754,7 @@
 		}
 
 		h1 {
-			font-size: 72px;
+			font-size: 44px;
 		}
 
 		.about {

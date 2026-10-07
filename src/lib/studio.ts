@@ -87,7 +87,7 @@ export const faqs = [
 		a: 'yes. i set up fast hosting and connect your domain, so it is one less thing to figure out.'
 	},
 	{
-		q: 'who is behind notch?',
+		q: 'who is behind notch studio?',
 		a: 'neşet kablan, an electrical and computer engineering student at northeastern who designs and builds for the web.'
 	}
 ];
