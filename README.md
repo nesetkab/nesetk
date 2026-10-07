@@ -24,6 +24,12 @@ npm run build    # static site in build/
   ---
   ```
 
+## notch studio
+
+The web design page lives at `/studio`, with its content in `src/lib/studio.ts` and the logo in `static/notch/`.
+
+The inquiry form opens the visitor's email app until a form service is connected. To get submissions without that step, make a free form on [Formspree](https://formspree.io), copy its endpoint (like `https://formspree.io/f/abcdwxyz`), and set `INQUIRY_ENDPOINT` in `src/lib/studio.ts`.
+
 ## Things to try
 
 - Click the big quarter circle at the top of any page.

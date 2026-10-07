@@ -1,0 +1,5 @@
+<svg width="300" height="64" viewBox="0 0 300 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 49V0A64 64 0 0 1 64 64H15A15 15 0 0 0 0 49Z" fill="#000"/>
+<path d="M0 55A9 9 0 0 1 9 64H0Z" fill="#FF5A1F"/>
+<text x="80" y="63" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-3.1" fill="#000">notch</text>
+</svg>

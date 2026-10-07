@@ -6,6 +6,7 @@
 	import { HOME_COLOR, projects } from '$lib/data';
 	import { posts } from '$lib/posts';
 	import { RESUME_COLOR } from '$lib/resume';
+	import { STUDIO_COLOR } from '$lib/studio';
 
 	let el: HTMLDivElement;
 
@@ -14,6 +15,7 @@
 		if (kind === 'projects') return projects.find((p) => p.slug === slug)?.color ?? HOME_COLOR;
 		if (kind === 'blog') return posts.find((p) => p.slug === slug)?.color ?? HOME_COLOR;
 		if (kind === 'resume') return RESUME_COLOR;
+		if (kind === 'studio') return STUDIO_COLOR;
 		return HOME_COLOR;
 	}
 

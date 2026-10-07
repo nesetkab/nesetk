@@ -169,14 +169,14 @@ img {
 	transition: opacity 0.2s ease;
 }
 
-.zoom:hover .peek,
-.zoom:focus-visible .peek {
+:is(.zoom, .peek-host):hover .peek,
+:is(.zoom, .peek-host):focus-visible .peek {
 	scale: 1;
 	rotate: 0deg;
 }
 
-.zoom:hover .peek span,
-.zoom:focus-visible .peek span {
+:is(.zoom, .peek-host):hover .peek span,
+:is(.zoom, .peek-host):focus-visible .peek span {
 	opacity: 1;
 	transition-delay: 0.15s;
 }
