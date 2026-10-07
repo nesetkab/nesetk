@@ -1,5 +1,5 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>.q { fill: #000; } @media (prefers-color-scheme: dark) { .q { fill: #fff; } }</style>
 <path class="q" d="M0 26.58V0A64 64 0 0 1 64 64H37.42A37.42 37.42 0 0 0 0 26.58Z"/>
-<circle cx="15.5" cy="48.5" r="12" fill="#FF5A1F"/>
+<circle cx="15.5" cy="48.5" r="10.5" fill="#FF5A1F"/>
 </svg>
