@@ -8,7 +8,7 @@ export type Work = {
 	title: string;
 	kind: string;
 	stack: string;
-	image: string;
+	image?: string;
 	live: string;
 	more?: string;
 };
@@ -29,6 +29,12 @@ export const work: Work[] = [
 		image: '/projects/pitstop-1.webp',
 		live: 'https://www.ftcpitstop.com/',
 		more: '/projects/pitstop'
+	},
+	{
+		title: 'pedro pathing docs',
+		kind: 'docs for an FTC path following library',
+		stack: 'next.js, fumadocs, tailwind',
+		live: 'https://pedropathing.com/docs'
 	},
 	{
 		title: 'neşet',

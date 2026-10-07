@@ -119,7 +119,10 @@
 		<Row rot={90} label="work" labelWidth={190} delay={200}>
 			<div class="work">
 				{#each work as item, i}
-					<article class="piece rise" class:wide={i === 0} style:--d="{300 + i * 100}ms">
+					<article
+						class="piece rise"
+						class:wide={i === 0 || (i === work.length - 1 && i % 2 === 1)}
+						style:--d="{300 + i * 100}ms">
 						<a
 							class="shot peek-host"
 							href={item.live}
@@ -127,7 +130,11 @@
 							rel={external(item.live) ? 'noopener noreferrer' : undefined}
 							aria-label="visit {item.title}"
 						>
-							<img src={item.image} alt="{item.title} home page" loading="lazy" />
+							{#if item.image}
+								<img src={item.image} alt="{item.title} home page" loading="lazy" />
+							{:else}
+								<span class="cover" aria-hidden="true"><span class="cq"></span>{item.title}</span>
+							{/if}
 							<span class="peek" aria-hidden="true"><span>visit</span></span>
 						</a>
 						<div class="meta">
@@ -359,6 +366,37 @@
 	.shot:hover img,
 	.shot:focus-visible img {
 		scale: 1.04;
+	}
+
+	.cover {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: flex-end;
+		padding: calc(22 * var(--u));
+		background: color-mix(in srgb, var(--accent) 16%, var(--bg));
+		font-family: 'Fraunces', var(--font);
+		font-weight: 800;
+		font-size: calc(40 * var(--u));
+		line-height: 0.9;
+		letter-spacing: -0.03em;
+	}
+
+	.cq {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 34%;
+		aspect-ratio: 1;
+		background: var(--accent);
+		border-radius: 0 0 0 100%;
+		transform-origin: 100% 0;
+		transition: scale 0.6s var(--spring);
+	}
+
+	.shot:hover .cq,
+	.shot:focus-visible .cq {
+		scale: 1.12;
 	}
 
 	.meta {
@@ -777,6 +815,10 @@
 
 		.wide .shot {
 			aspect-ratio: 16 / 10;
+		}
+
+		.cover {
+			font-size: 32px;
 		}
 
 		.meta h3,
