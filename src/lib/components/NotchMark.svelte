@@ -3,8 +3,8 @@
 </script>
 
 <svg style:width={size} style:height={size} viewBox="0 0 64 64" fill="none" aria-hidden="true">
-	<path d="M0 33.82V0A64 64 0 0 1 64 64H30.18A30.18 30.18 0 0 0 0 33.82Z" fill="currentColor" />
-	<circle class="dot" cx="12.5" cy="51.5" r="9" />
+	<path d="M0 26.58V0A64 64 0 0 1 64 64H37.42A37.42 37.42 0 0 0 0 26.58Z" fill="currentColor" />
+	<circle class="dot" cx="15.5" cy="48.5" r="12" />
 </svg>
 
 <style>
