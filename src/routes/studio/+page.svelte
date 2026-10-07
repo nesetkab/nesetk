@@ -565,13 +565,13 @@
 	.field {
 		display: flex;
 		flex-direction: column;
-		gap: calc(4 * var(--u));
+		gap: calc(8 * var(--u));
 	}
 
 	.field > span,
 	legend {
-		font-size: calc(15 * var(--u));
-		color: var(--muted);
+		font-size: calc(16 * var(--u));
+		color: color-mix(in srgb, var(--fg) 70%, transparent);
 	}
 
 	em {
@@ -582,18 +582,19 @@
 	.field input,
 	.field textarea {
 		width: 100%;
-		padding: calc(8 * var(--u)) 0;
+		padding: calc(12 * var(--u)) calc(14 * var(--u));
 		font: inherit;
-		font-size: calc(22 * var(--u));
+		font-size: calc(20 * var(--u));
 		letter-spacing: inherit;
 		color: var(--fg);
-		background: transparent;
-		border: 0;
-		border-bottom: 1.5px solid color-mix(in srgb, var(--fg) 25%, transparent);
-		border-radius: 0;
+		background: var(--faint);
+		border: 1.5px solid transparent;
+		border-radius: 8px;
 		outline: none;
 		resize: vertical;
-		transition: border-color 0.25s ease;
+		transition:
+			border-color 0.25s ease,
+			background-color 0.25s ease;
 	}
 
 	.field input::placeholder,
@@ -603,19 +604,21 @@
 
 	.field input:focus,
 	.field textarea:focus {
-		border-bottom-color: var(--accent);
+		border-color: var(--accent);
+		background: var(--bg);
 	}
 
 	.field input:user-invalid,
 	.field textarea:user-invalid {
-		border-bottom-color: #ff4d4d;
+		border-color: #ff4d4d;
 	}
 
 	fieldset {
 		border: 0;
-		display: flex;
-		flex-direction: column;
-		gap: calc(10 * var(--u));
+	}
+
+	legend {
+		margin-bottom: calc(8 * var(--u));
 	}
 
 	.chips {
@@ -637,7 +640,6 @@
 	.chip span {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.45em;
 		padding: 0.35em 0.9em;
 		font-size: calc(18 * var(--u));
 		border: 1.5px solid color-mix(in srgb, var(--fg) 30%, transparent);
@@ -652,12 +654,14 @@
 	.chip i {
 		width: 0;
 		height: 0.6em;
+		margin-right: 0;
 		background: currentColor;
 		border-radius: 0 0 100% 0;
 		scale: 0;
 		rotate: -180deg;
 		transition:
 			width 0.3s var(--out),
+			margin-right 0.3s var(--out),
 			scale 0.45s var(--spring),
 			rotate 0.45s var(--spring);
 	}
@@ -674,6 +678,7 @@
 
 	.chip input:checked + span i {
 		width: 0.6em;
+		margin-right: 0.45em;
 		scale: 1;
 		rotate: 0deg;
 	}
@@ -825,18 +830,28 @@
 			font-size: 19px;
 		}
 
+		.inquiry {
+			gap: 22px;
+		}
+
 		.field > span,
 		legend {
-			font-size: 13px;
+			font-size: 14px;
 		}
 
 		.field input,
 		.field textarea {
-			font-size: 18px;
+			font-size: 17px;
+			padding: 11px 12px;
+		}
+
+		.chips {
+			gap: 8px;
 		}
 
 		.chip span {
 			font-size: 15px;
+			padding: 0.4em 0.85em;
 		}
 
 		.send {
